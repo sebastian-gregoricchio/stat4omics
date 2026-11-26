@@ -1,3 +1,13 @@
+![release](https://img.shields.io/github/v/release/sebastian-gregoricchio/stat4omics?sort=semver)
+[![license](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://sebastian-gregoricchio.github.io/stat4omics/LICENSE.md/LICENSE)
+[![R-CMD-check](https://github.com/sebastian-gregoricchio/stat4omics/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/sebastian-gregoricchio/stat4omics/actions/workflows/R-CMD-check.yaml)
+[![forks](https://img.shields.io/github/forks/sebastian-gregoricchio/stat4omics?style=social)](https://github.com/sebastian-gregoricchio/stat4omics/fork)
+<!-- ![update](https://badges.pufler.dev/updated/sebastian-gregoricchio/stat4omics)
+![visits](https://badges.pufler.dev/visits/sebastian-gregoricchio/stat4omics) -->
+<!---![downloads](https://img.shields.io/github/downloads/sebastian-gregoricchio/stat4omics/total.svg)--->
+
+
+
 # stat4omics
 Packages and datasets for the stat4omics course provided by the NKI.
 
