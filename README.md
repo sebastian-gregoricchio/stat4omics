@@ -16,7 +16,7 @@ remotes::install_github("sebastian-gregoricchio/stat4omics",
                         build_vignettes = FALSE, build_manual = FALSE)
 ```
 
-### 1.2 Via resource file
+### 1.2 Via source file
 ```
 download.file("https://github.com/sebastian-gregoricchio/stat4omics/archive/refs/heads/main.tar.gz",
               destfile = "./stat4omics.tar.gz",
