@@ -3,10 +3,10 @@ Packages and datasets for the stat4omics course provided by the NKI.
 
 <br>
 
-## Installation
+## 1. Installation
 This package allows for the installation of all packages needed for the `Statistics for Omics` course provided by the NKI.
 
-### Via GitHub/`remotes`
+### 1.1 Via GitHub/`remotes`
 ```
 if (!requireNamespace("remotes", quietly = TRUE)) {
   install.packages("remotes")
@@ -16,7 +16,7 @@ remotes::install_github("sebastian-gregoricchio/stat4omics",
                         build_vignettes = FALSE, build_manual = FALSE)
 ```
 
-### Via resource file
+### 1.2 Via resource file
 ```
 download.file("https://github.com/sebastian-gregoricchio/stat4omics/archive/refs/heads/main.tar.gz",
               destfile = "./stat4omics.tar.gz",
@@ -27,7 +27,7 @@ install.packages("./stat4omics.tar.gz", type = "source", repos = NULL)
 
 <br>
 
-## Residual packages
+## 2. Residual packages
 Some packages are not available on the CRAN/BioConductor. However, `stat4omics` can install it for you.<br>
 Once the installation of `stat4omics` is completed, type the following code on the R console:
 
