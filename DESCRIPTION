@@ -1,0 +1,44 @@
+Package: stat4omics
+Type: Package
+Title: Packages and datasets for the stat4omics course provided by the NKI.
+Version: 0.2025.0
+Authors@R: c(
+    person(
+      "Sebastian", "Gregoricchio",
+      email = "s.gregoricchio@nki.nl",
+      role = c("aut", "cre"),
+      comment = c(ORCID = "0000-0001-9209-5403")
+    )
+  )
+Description: Packages and datasets for the stat4omics course provided by the NKI
+Depends:
+  R (>= 4.0.0),
+  qvalue
+Imports:
+  BiocManager,
+  caret,
+  ConsensusClusterPlus,
+  DT,
+  edgeR,
+  factoextra,
+  ggplot2,
+  glmnet,
+  globaltest,
+  gplots,
+  HDF5Array,
+  matrixStats,
+  pals,
+  pROC,
+  Rtsne,
+  SingleCellExperiment,
+  stringr,
+  statmod,
+  umap,
+  VennDiagram
+Suggests:
+  usethis
+biocViews:
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+LazyDataCompression: xz
