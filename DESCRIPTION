@@ -1,13 +1,38 @@
 Package: stat4omics
 Type: Package
 Title: Packages and datasets for the stat4omics course provided by the NKI.
-Version: 0.2025.0
+Version: 0.2027.1
 Authors@R: c(
     person(
       "Sebastian", "Gregoricchio",
       email = "s.gregoricchio@nki.nl",
       role = c("aut", "cre"),
       comment = c(ORCID = "0000-0001-9209-5403")
+    ),
+    person(
+      "Renaud", "Tissier",
+      email = "r.tissier@nki.nl",
+      role = c("aut")
+    ),
+    person(
+      "Vincent", "Pappalardo",
+      email = "v.pappalardo@nki.nl",
+      role = c("aut")
+    ),
+    person(
+      "Tesa M.", "Severson",
+      email = "t.severson@nki.nl",
+      role = c("aut")
+    ),
+    person(
+      "Terry", "Chan",
+      email = "t.chan@nki.nl",
+      role = c("aut")
+    ),
+    person(
+      "Renee X.", "Menezes",
+      email = "r.menezes@nki.nl",
+      role = c("aut")
     )
   )
 Description: Packages and datasets for the stat4omics course provided by the NKI
