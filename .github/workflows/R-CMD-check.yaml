@@ -11,19 +11,34 @@ permissions: read-all
 
 jobs:
   R-CMD-check:
-    runs-on: ${{ matrix.config.os }}
+    runs-on: ${{ matrix.os }}
 
-    name: ${{ matrix.config.os }} (${{ matrix.config.r }})
+    name: ${{ matrix.os }} (R ${{ matrix.r }})
 
     strategy:
       fail-fast: false
       matrix:
-        config:
-          - {os: macos-latest,    r: 'release'}
-          - {os: windows-latest,  r: 'release'}
-          - {os: ubuntu-latest,   r: 'devel', http-user-agent: 'release'}
-          - {os: ubuntu-latest,   r: 'release'}
-          #- {os: ubuntu-latest,   r: 'oldrel-1'}
+        # Every OS is run with every R version listed here.
+        # Keep the versions quoted: unquoted, YAML reads 4.0 as the number 4.
+        # A minor version ('4.4') means the last patch release (4.4.3).
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        r: ['4.0', '4.1', '4.2', '4.3', '4.4', '4.5', '4.6']
+
+        # R 4.0 has no Apple Silicon build and macos-latest is Apple Silicon,
+        # so R 4.0 on macOS runs on GitHub's Intel runner instead
+        # (available until GitHub retires it in 2027).
+        exclude:
+          - os: macos-latest
+            r: '4.0'
+
+        include:
+          - os: macos-15-intel
+            r: '4.0'
+          # R-devel (currently 4.7) on Linux only. When R 4.7 is released
+          # (April 2027), add '4.7' to the list above.
+          - os: ubuntu-latest
+            r: 'devel'
+            http-user-agent: 'release'
 
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
@@ -36,11 +51,12 @@ jobs:
 
       - uses: r-lib/actions/setup-r@v2
         with:
-          r-version: ${{ matrix.config.r }}
-          http-user-agent: ${{ matrix.config.http-user-agent }}
+          r-version: ${{ matrix.r }}
+          http-user-agent: ${{ matrix.http-user-agent }}
           use-public-rspm: true
 
       - uses: r-lib/actions/setup-r-dependencies@v2
+        id: deps
         with:
           extra-packages: any::rcmdcheck
           needs: check
@@ -50,3 +66,39 @@ jobs:
           error-on: '"error"'
           upload-snapshots: true
           build_args: 'c("--no-manual","--compact-vignettes=gs+qpdf")'
+
+      # Install stat4omics the way a student would, then run init() and make
+      # sure the extra packages it installs (currently SSPA) actually load.
+      # Runs even if R CMD check failed, as long as the dependencies installed.
+      - name: Test stat4omics::init()
+        if: ${{ !cancelled() && steps.deps.outcome == 'success' }}
+        shell: Rscript {0}
+        run: |
+          # Use a fresh library at the front of the library path, so that
+          # stat4omics and everything init() installs land there and never
+          # end up in the package cache that setup-r-dependencies saves.
+          # Otherwise later runs would restore SSPA from the cache and
+          # init() would have nothing left to install.
+          lib <- file.path(tempdir(), "init-lib")
+          dir.create(lib)
+          .libPaths(c(lib, .libPaths()))
+
+          if (requireNamespace("SSPA", quietly = TRUE)) {
+            stop("SSPA is already installed, so init() would not be tested")
+          }
+
+          install.packages(".", repos = NULL, type = "source", lib = lib)
+
+          stat4omics::init()
+
+          # Fail the job if init() did not leave a working SSPA behind
+          library(SSPA)
+          cat("SSPA", format(packageVersion("SSPA")), "installed in",
+              dirname(find.package("SSPA")), "\n")
+
+          # Smoke test that also runs SSPA's compiled code
+          set.seed(1)
+          pd <- pilotData(statistics = c(rnorm(900), rnorm(100, 3)),
+                          samplesize = sqrt(10), distribution = "norm")
+          ss <- sampleSize(pd, method = "deconv")
+          cat("SSPA works: estimated pi0 =", round(ss@pi0, 3), "\n")
