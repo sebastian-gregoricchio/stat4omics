@@ -1,0 +1,21 @@
+# R CMD check + init() test on R-devel (currently 4.7), Linux only.
+# Steps: check-r-version.yaml
+# When R 4.7 is released (April 2027), copy R-4.6.yaml to R-4.7.yaml
+# and set r-version: '4.7'; this file then tests 4.8-devel.
+name: R devel
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+  workflow_dispatch:
+
+permissions: read-all
+
+jobs:
+  check:
+    uses: ./.github/workflows/check-r-version.yaml
+    with:
+      r-version: 'devel'
+      os: '["ubuntu-latest"]'
+      http-user-agent: 'release'

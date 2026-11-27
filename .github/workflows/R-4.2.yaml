@@ -1,0 +1,16 @@
+# R CMD check + init() test on R 4.2 (last 4.2.x). Steps: check-r-version.yaml
+name: R 4.2
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+  workflow_dispatch:
+
+permissions: read-all
+
+jobs:
+  check:
+    uses: ./.github/workflows/check-r-version.yaml
+    with:
+      r-version: '4.2'

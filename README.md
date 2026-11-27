@@ -1,7 +1,15 @@
 ![release](https://img.shields.io/github/v/release/sebastian-gregoricchio/stat4omics?sort=semver)
 [![license](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://sebastian-gregoricchio.github.io/stat4omics/LICENSE.md/LICENSE)
-[![R-CMD-check](https://github.com/sebastian-gregoricchio/stat4omics/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/sebastian-gregoricchio/stat4omics/actions/workflows/R-CMD-check.yaml)
 [![forks](https://img.shields.io/github/forks/sebastian-gregoricchio/stat4omics?style=social)](https://github.com/sebastian-gregoricchio/stat4omics/fork)
+
+[![R 4.0](https://github.com/sebastian-gregoricchio/stat4omics/actions/workflows/R-4.0.yaml/badge.svg?branch=main)](https://github.com/sebastian-gregoricchio/stat4omics/actions/workflows/R-4.0.yaml)
+[![R 4.1](https://github.com/sebastian-gregoricchio/stat4omics/actions/workflows/R-4.1.yaml/badge.svg?branch=main)](https://github.com/sebastian-gregoricchio/stat4omics/actions/workflows/R-4.1.yaml)
+[![R 4.2](https://github.com/sebastian-gregoricchio/stat4omics/actions/workflows/R-4.2.yaml/badge.svg?branch=main)](https://github.com/sebastian-gregoricchio/stat4omics/actions/workflows/R-4.2.yaml)
+[![R 4.3](https://github.com/sebastian-gregoricchio/stat4omics/actions/workflows/R-4.3.yaml/badge.svg?branch=main)](https://github.com/sebastian-gregoricchio/stat4omics/actions/workflows/R-4.3.yaml)
+[![R 4.4](https://github.com/sebastian-gregoricchio/stat4omics/actions/workflows/R-4.4.yaml/badge.svg?branch=main)](https://github.com/sebastian-gregoricchio/stat4omics/actions/workflows/R-4.4.yaml)
+[![R 4.5](https://github.com/sebastian-gregoricchio/stat4omics/actions/workflows/R-4.5.yaml/badge.svg?branch=main)](https://github.com/sebastian-gregoricchio/stat4omics/actions/workflows/R-4.5.yaml)
+[![R 4.6](https://github.com/sebastian-gregoricchio/stat4omics/actions/workflows/R-4.6.yaml/badge.svg?branch=main)](https://github.com/sebastian-gregoricchio/stat4omics/actions/workflows/R-4.6.yaml)
+[![R devel](https://github.com/sebastian-gregoricchio/stat4omics/actions/workflows/R-devel.yaml/badge.svg?branch=main)](https://github.com/sebastian-gregoricchio/stat4omics/actions/workflows/R-devel.yaml)
 <!-- ![update](https://badges.pufler.dev/updated/sebastian-gregoricchio/stat4omics)
 ![visits](https://badges.pufler.dev/visits/sebastian-gregoricchio/stat4omics) -->
 <!---![downloads](https://img.shields.io/github/downloads/sebastian-gregoricchio/stat4omics/total.svg)--->

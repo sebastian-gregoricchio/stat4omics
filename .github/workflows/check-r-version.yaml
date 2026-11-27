@@ -1,47 +1,39 @@
+# Shared steps for the per-R-version workflows (R-4.0.yaml ... R-devel.yaml).
+# This file does not run on its own: each R-*.yaml calls it with its R version.
+# Change the steps here and every R version picks the change up.
 # Workflow derived from https://github.com/r-lib/actions/tree/v2/examples
 # Need help debugging build failures? Start at https://github.com/r-lib/actions#where-to-find-help
-name: R-CMD-check
+name: check-r-version
 
 on:
-  push:
-    branches: [main, master]
-  pull_request:
-
-permissions: read-all
+  workflow_call:
+    inputs:
+      r-version:
+        description: "R version to test, e.g. '4.4' (last 4.4.x) or 'devel'"
+        type: string
+        required: true
+      os:
+        description: "JSON list of runners to test this R version on"
+        type: string
+        default: '["ubuntu-latest", "macos-latest", "windows-latest"]'
+      http-user-agent:
+        description: "Passed to setup-r; 'release' lets R-devel use release binaries"
+        type: string
+        default: ''
 
 jobs:
   R-CMD-check:
     runs-on: ${{ matrix.os }}
 
-    name: ${{ matrix.os }} (R ${{ matrix.r }})
+    name: ${{ matrix.os }} (R ${{ inputs.r-version }})
 
     strategy:
       fail-fast: false
       matrix:
-        # Every OS is run with every R version listed here.
-        # Keep the versions quoted: unquoted, YAML reads 4.0 as the number 4.
-        # A minor version ('4.4') means the last patch release (4.4.3).
-        os: [ubuntu-latest, macos-latest, windows-latest]
-        r: ['4.0', '4.1', '4.2', '4.3', '4.4', '4.5', '4.6']
-
-        # R 4.0 has no Apple Silicon build and macos-latest is Apple Silicon,
-        # so R 4.0 on macOS runs on GitHub's Intel runner instead
-        # (available until GitHub retires it in 2027).
-        exclude:
-          - os: macos-latest
-            r: '4.0'
-
-        include:
-          - os: macos-15-intel
-            r: '4.0'
-          # R-devel (currently 4.7) on Linux only. When R 4.7 is released
-          # (April 2027), add '4.7' to the list above.
-          - os: ubuntu-latest
-            r: 'devel'
-            http-user-agent: 'release'
+        os: ${{ fromJSON(inputs.os) }}
 
     env:
-      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      GITHUB_PAT: ${{ github.token }}
       R_KEEP_PKG_SOURCE: yes
 
     steps:
@@ -51,8 +43,8 @@ jobs:
 
       - uses: r-lib/actions/setup-r@v2
         with:
-          r-version: ${{ matrix.r }}
-          http-user-agent: ${{ matrix.http-user-agent }}
+          r-version: ${{ inputs.r-version }}
+          http-user-agent: ${{ inputs.http-user-agent }}
           use-public-rspm: true
 
       - uses: r-lib/actions/setup-r-dependencies@v2
