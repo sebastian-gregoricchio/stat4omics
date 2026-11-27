@@ -37,7 +37,7 @@ Authors@R: c(
   )
 Description: Packages and datasets for the stat4omics course provided by the NKI
 Depends:
-  R (>= 4.0.0),
+  R (>= 4.3.0),
   qvalue
 Imports:
   BiocManager,
