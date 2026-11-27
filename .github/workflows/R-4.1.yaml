@@ -14,3 +14,5 @@ jobs:
     uses: ./.github/workflows/check-r-version.yaml
     with:
       r-version: '4.1'
+      # R 4.1 uses Bioconductor 3.14, which Posit's mirror no longer carries
+      bioc-mirror: 'https://bioconductor.org'

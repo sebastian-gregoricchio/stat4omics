@@ -20,6 +20,13 @@ on:
         description: "Passed to setup-r; 'release' lets R-devel use release binaries"
         type: string
         default: ''
+      bioc-mirror:
+        description: >-
+          Where pak downloads Bioconductor packages from. The default is pak's
+          own default, Posit's mirror, which only carries recent Bioconductor
+          releases (3.20 and later). Older R versions need https://bioconductor.org.
+        type: string
+        default: 'https://bioconductor.posit.co'
 
 jobs:
   R-CMD-check:
@@ -35,6 +42,7 @@ jobs:
     env:
       GITHUB_PAT: ${{ github.token }}
       R_KEEP_PKG_SOURCE: yes
+      R_BIOC_MIRROR: ${{ inputs.bioc-mirror }}
 
     steps:
       - uses: actions/checkout@v4

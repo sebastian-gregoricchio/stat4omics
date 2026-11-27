@@ -17,3 +17,5 @@ jobs:
       # R 4.0 has no Apple Silicon build and macos-latest is Apple Silicon,
       # so macOS runs on GitHub's Intel runner (retired by GitHub in 2027).
       os: '["ubuntu-latest", "macos-15-intel", "windows-latest"]'
+      # R 4.0 uses Bioconductor 3.12, which Posit's mirror no longer carries
+      bioc-mirror: 'https://bioconductor.org'
